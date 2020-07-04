@@ -28,17 +28,17 @@ export const signin = user => {
       console.log("got a res");
       return response.json();
     })
-    .catch(err => console.log("err is "+ err));
+    .catch(err => console.log("err is " + err));
 };
 
 export const authenticate = (data, next) => {
-  if (typeof window !== "undefined") {//i.e if window object is accessible to us
-    
-    localStorage.setItem("jwt", JSON.stringify(data));//we're storing some info inside this jwt token
-    next();
-  } 
-};
+  if (typeof window !== "undefined") {
+    //i.e if window object is accessible to us
 
+    localStorage.setItem("jwt", JSON.stringify(data)); //we're storing some info inside this jwt token
+    next();
+  }
+};
 
 //to signout, access window object, ocal storage and remove the jwt token
 export const signout = next => {
@@ -55,13 +55,11 @@ export const signout = next => {
 };
 
 export const isAuthenticated = () => {
-  
   if (typeof window == "undefined") {
-   
     return false;
   }
   if (localStorage.getItem("jwt")) {
-      return JSON.parse(localStorage.getItem("jwt"));
+    return JSON.parse(localStorage.getItem("jwt"));
   } else {
     return false;
   }
